@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.restaurante</groupId>
-	<artifactId>backend</artifactId>
+	<artifactId>restaurante-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name/>
-	<description/>
+	<name>restaurante-api</name>
+	<description>API do sistema de restaurante</description>
 	<url/>
 	<licenses>
 		<license/>
