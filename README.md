@@ -1,21 +1,23 @@
-# Restaurante API
+# Restaurante
 
-Repositório do sistema de restaurante com backend Spring Boot e frontend React/Vite.
+Repositorio do sistema de restaurante com backend Spring Boot e frontend React/Vite.
 
 ## Estrutura
 
-- `src/`: backend Java com Spring Boot.
-- `frontend/`: frontend React com Vite.
+- `backend/`: API Java com Spring Boot.
+- `frontend/`: aplicacao React com Vite.
 
 ## Backend
 
 ```bash
+cd backend
 ./mvnw spring-boot:run
 ```
 
 No Windows:
 
 ```bash
+cd backend
 mvnw.cmd spring-boot:run
 ```
 
