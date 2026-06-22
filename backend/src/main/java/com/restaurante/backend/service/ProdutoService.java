@@ -27,7 +27,7 @@ public class ProdutoService {
 
     public Produto buscarPorId(Long id) {
         return produtoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+                .orElseThrow(() -> new RuntimeException("Produto não encontrada"));
     }
 
     public Produto atualizar(Long id, Produto produtoAtualizado) {

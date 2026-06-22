@@ -34,11 +34,11 @@ public class ClienteController {
     }
 
     @PutMapping("/{id}")
-    public Cliente atualizar(@PathVariable Long id, @RequestParam Cliente cliente) {
+    public Cliente atualizar(@PathVariable Long id, @RequestBody Cliente cliente) {
         return clienteService.atualizar(id, cliente);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable Long id) {
         clienteService.deletar(id);

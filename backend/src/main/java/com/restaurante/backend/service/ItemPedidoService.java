@@ -27,7 +27,7 @@ public class ItemPedidoService {
 
     public ItemPedido buscarPorId(Long id) {
         return itemPedidoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+                .orElseThrow(() -> new RuntimeException("Item pedido não encontrada"));
     }
 
     public ItemPedido atualizar(Long id, ItemPedido itemPedidoAtualizado) {

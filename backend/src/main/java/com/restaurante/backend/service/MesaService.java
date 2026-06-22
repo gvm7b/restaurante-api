@@ -27,7 +27,7 @@ public class MesaService {
 
     public Mesa buscarPorId(Long id) {
         return mesaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+                .orElseThrow(() -> new RuntimeException("Mesa não encontrada"));
     }
 
     public Mesa atualizar(Long id, Mesa mesaAtualizada) {

@@ -25,7 +25,7 @@ public class PagamentoService {
 
     public Pagamento buscarPorId(Long id) {
         return pagamentoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+                .orElseThrow(() -> new RuntimeException("Pagamento não encontrada"));
     }
 
     public Pagamento atualizar(Long id, Pagamento pagamentoAtualizado) {

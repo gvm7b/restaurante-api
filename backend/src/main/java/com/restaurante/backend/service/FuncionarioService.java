@@ -25,7 +25,7 @@ public class FuncionarioService {
 
     public Funcionario buscarPorId(Long id) {
         return funcionarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+                .orElseThrow(() -> new RuntimeException("Funcionario não encontrada"));
     }
 
     public Funcionario atualizar(Long id, Funcionario funcionarioAtualizado) {
