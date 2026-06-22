@@ -6,18 +6,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Entity
-@Table(name = "categoria")
+@Table(name = "funcionario")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Categoria {
+public class Funcionario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_categoria")
-    private Long idCategoria;
+    @Column(name = "id_funcionario")
+    private Long idFuncionario;
 
     @Column(nullable = false, length = 100)
     private String nome;
+
+    @Column(nullable = false, length = 50)
+    private String cargo;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal salario;
 }

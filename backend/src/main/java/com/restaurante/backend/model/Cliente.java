@@ -8,7 +8,7 @@ import lombok.Setter;
 import org.hibernate.Length;
 
 @Entity
-@Table
+@Table(name = "cliente")
 @Getter
 @Setter
 @NoArgsConstructor
