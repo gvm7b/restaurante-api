@@ -2,6 +2,7 @@ package com.restaurante.backend.controller;
 
 import com.restaurante.backend.model.Produto;
 import com.restaurante.backend.service.ProdutoService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class ProdutoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Produto cadastrar(@RequestBody Produto produto) {
+    public Produto cadastrar(@Valid @RequestBody Produto produto) {
         return produtoService.salvar(produto);
     }
 
@@ -34,7 +35,7 @@ public class ProdutoController {
     }
 
     @PutMapping("/{id}")
-    public Produto atualizar(@PathVariable Long id, @RequestBody Produto produto) {
+    public Produto atualizar(@PathVariable Long id, @Valid @RequestBody Produto produto) {
         return produtoService.atualizar(id, produto);
     }
 

@@ -1,5 +1,6 @@
 package com.restaurante.backend.service;
 
+import com.restaurante.backend.exception.ResourceNotFoundException;
 import com.restaurante.backend.model.Cliente;
 import com.restaurante.backend.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class ClienteService {
 
     public Cliente buscarPorId(Long id) {
         return clienteRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente nao encontrado"));
     }
 
     public Cliente atualizar(Long id, Cliente clienteAtualizado) {

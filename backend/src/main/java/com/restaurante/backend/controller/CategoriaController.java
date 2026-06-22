@@ -2,6 +2,7 @@ package com.restaurante.backend.controller;
 
 import com.restaurante.backend.model.Categoria;
 import com.restaurante.backend.service.CategoriaService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class CategoriaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Categoria cadastrar(@RequestBody Categoria categoria) {
+    public Categoria cadastrar(@Valid @RequestBody Categoria categoria) {
         return categoriaService.salvar(categoria);
     }
 
@@ -34,7 +35,7 @@ public class CategoriaController {
     }
 
     @PutMapping("/{id}")
-    public Categoria atualizar(@PathVariable Long id, @RequestBody Categoria categoria) {
+    public Categoria atualizar(@PathVariable Long id, @Valid @RequestBody Categoria categoria) {
         return categoriaService.atualizar(id, categoria);
     }
 

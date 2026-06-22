@@ -2,6 +2,7 @@ package com.restaurante.backend.controller;
 
 import com.restaurante.backend.model.Pedido;
 import com.restaurante.backend.service.PedidoService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class PedidoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Pedido cadastrar(@RequestBody Pedido pedido) {
+    public Pedido cadastrar(@Valid @RequestBody Pedido pedido) {
         return pedidoService.salvar(pedido);
     }
 
@@ -34,7 +35,7 @@ public class PedidoController {
     }
 
     @PutMapping("/{id}")
-    public Pedido atualizar(@PathVariable Long id, @RequestBody Pedido pedido) {
+    public Pedido atualizar(@PathVariable Long id, @Valid @RequestBody Pedido pedido) {
         return pedidoService.atualizar(id, pedido);
     }
 

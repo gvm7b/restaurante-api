@@ -1,5 +1,6 @@
 package com.restaurante.backend.service;
 
+import com.restaurante.backend.exception.ResourceNotFoundException;
 import com.restaurante.backend.model.Funcionario;
 import com.restaurante.backend.repository.FuncionarioRepository;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class FuncionarioService {
 
     public Funcionario buscarPorId(Long id) {
         return funcionarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Funcionario não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Funcionario nao encontrado"));
     }
 
     public Funcionario atualizar(Long id, Funcionario funcionarioAtualizado) {

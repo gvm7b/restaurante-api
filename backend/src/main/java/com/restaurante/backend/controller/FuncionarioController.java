@@ -2,6 +2,7 @@ package com.restaurante.backend.controller;
 
 import com.restaurante.backend.model.Funcionario;
 import com.restaurante.backend.service.FuncionarioService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class FuncionarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Funcionario cadastrar(@RequestBody Funcionario funcionario) {
+    public Funcionario cadastrar(@Valid @RequestBody Funcionario funcionario) {
         return funcionarioService.salvar(funcionario);
     }
 
@@ -34,7 +35,7 @@ public class FuncionarioController {
     }
 
     @PutMapping("/{id}")
-    public Funcionario atualizar(@PathVariable Long id, @RequestBody Funcionario funcionario) {
+    public Funcionario atualizar(@PathVariable Long id, @Valid @RequestBody Funcionario funcionario) {
         return funcionarioService.atualizar(id, funcionario);
     }
 

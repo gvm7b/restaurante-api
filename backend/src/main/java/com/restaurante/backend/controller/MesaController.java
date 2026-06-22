@@ -2,6 +2,7 @@ package com.restaurante.backend.controller;
 
 import com.restaurante.backend.model.Mesa;
 import com.restaurante.backend.service.MesaService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class MesaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mesa cadastrar(@RequestBody Mesa mesa) {
+    public Mesa cadastrar(@Valid @RequestBody Mesa mesa) {
         return mesaService.salvar(mesa);
     }
 
@@ -34,7 +35,7 @@ public class MesaController {
     }
 
     @PutMapping("/{id}")
-    public Mesa atualizar(@PathVariable Long id, @RequestBody Mesa mesa) {
+    public Mesa atualizar(@PathVariable Long id, @Valid @RequestBody Mesa mesa) {
         return mesaService.atualizar(id, mesa);
     }
 

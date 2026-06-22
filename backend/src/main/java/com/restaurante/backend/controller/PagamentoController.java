@@ -2,6 +2,7 @@ package com.restaurante.backend.controller;
 
 import com.restaurante.backend.model.Pagamento;
 import com.restaurante.backend.service.PagamentoService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class PagamentoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Pagamento cadastrar(@RequestBody Pagamento pagamento) {
+    public Pagamento cadastrar(@Valid @RequestBody Pagamento pagamento) {
         return pagamentoService.salvar(pagamento);
     }
 
@@ -34,7 +35,7 @@ public class PagamentoController {
     }
 
     @PutMapping("/{id}")
-    public Pagamento atualizar(@PathVariable Long id, @RequestBody Pagamento pagamento) {
+    public Pagamento atualizar(@PathVariable Long id, @Valid @RequestBody Pagamento pagamento) {
         return pagamentoService.atualizar(id, pagamento);
     }
 

@@ -1,5 +1,6 @@
 package com.restaurante.backend.service;
 
+import com.restaurante.backend.exception.ResourceNotFoundException;
 import com.restaurante.backend.model.Categoria;
 import com.restaurante.backend.repository.CategoriaRepository;
 import org.springframework.stereotype.Service;
@@ -25,14 +26,12 @@ public class CategoriaService {
 
     public Categoria buscarPorId(Long id) {
         return categoriaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria nao encontrada"));
     }
 
     public Categoria atualizar(Long id, Categoria categoriaAtualizada) {
         Categoria categoria = buscarPorId(id);
-
         categoria.setNome(categoriaAtualizada.getNome());
-
         return categoriaRepository.save(categoria);
     }
 

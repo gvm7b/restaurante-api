@@ -1,8 +1,7 @@
 package com.restaurante.backend.service;
 
-import com.restaurante.backend.model.Funcionario;
+import com.restaurante.backend.exception.ResourceNotFoundException;
 import com.restaurante.backend.model.Mesa;
-import com.restaurante.backend.repository.FuncionarioRepository;
 import com.restaurante.backend.repository.MesaRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +26,7 @@ public class MesaService {
 
     public Mesa buscarPorId(Long id) {
         return mesaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Mesa não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Mesa nao encontrada"));
     }
 
     public Mesa atualizar(Long id, Mesa mesaAtualizada) {
