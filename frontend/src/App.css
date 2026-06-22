@@ -48,18 +48,21 @@ body {
   gap: 14px;
 }
 
-.sidebar a {
+.sidebar button {
+  background: transparent;
+  box-shadow: none;
   color: #cbd5e1;
   text-decoration: none;
   padding: 14px 16px;
   border-radius: 12px;
   cursor: pointer;
   font-weight: 600;
+  text-align: left;
   transition: 0.2s;
 }
 
-.sidebar a.active,
-.sidebar a:hover {
+.sidebar button.active,
+.sidebar button:hover {
   background: linear-gradient(135deg, #f97316, #ea580c);
   color: white;
   box-shadow: 0 8px 20px rgba(249, 115, 22, 0.25);
@@ -113,6 +116,12 @@ button {
 button:hover {
   transform: translateY(-1px);
   opacity: 0.95;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+  transform: none;
 }
 
 /* Cards */
@@ -186,6 +195,10 @@ table {
   overflow: hidden;
 }
 
+.table-wrapper {
+  overflow-x: auto;
+}
+
 th {
   text-align: left;
   background: #fff7ed;
@@ -216,6 +229,31 @@ tbody tr:hover {
   box-shadow: 0 8px 18px rgba(239, 68, 68, 0.22);
 }
 
+.alert {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  color: #991b1b;
+  font-weight: 600;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+}
+
+.empty-state {
+  color: #64748b;
+  font-weight: 600;
+  text-align: center;
+}
+
+.actions-cell {
+  white-space: nowrap;
+}
+
+.muted {
+  color: #64748b;
+  font-weight: 600;
+}
+
 /* Formulário */
 .form {
   display: grid;
@@ -223,7 +261,8 @@ tbody tr:hover {
   gap: 18px;
 }
 
-.form input {
+.form input,
+.form select {
   padding: 15px;
   border: 1px solid #cbd5e1;
   border-radius: 12px;
@@ -233,7 +272,8 @@ tbody tr:hover {
   outline: none;
 }
 
-.form input:focus {
+.form input:focus,
+.form select:focus {
   border-color: #f97316;
   background: white;
   box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.12);
@@ -241,6 +281,16 @@ tbody tr:hover {
 
 .form button {
   width: fit-content;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.secondary {
+  background: #475569;
+  box-shadow: none;
 }
 
 /* Responsivo */
