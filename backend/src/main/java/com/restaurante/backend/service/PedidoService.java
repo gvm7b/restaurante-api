@@ -16,6 +16,8 @@ import java.util.List;
 @Service
 public class PedidoService {
 
+    private static final String STATUS_MESA_RESERVADA = "Reservado";
+
     private final PedidoRepository pedidoRepository;
     private final ClienteRepository clienteRepository;
     private final FuncionarioRepository funcionarioRepository;
@@ -94,7 +96,10 @@ public class PedidoService {
             throw new IllegalArgumentException("Informe uma mesa existente para o pedido");
         }
 
-        return mesaRepository.findById(pedido.getMesa().getIdMesa())
+        Mesa mesa = mesaRepository.findById(pedido.getMesa().getIdMesa())
                 .orElseThrow(() -> new ResourceNotFoundException("Mesa informada nao existe"));
+
+        mesa.setStatus(STATUS_MESA_RESERVADA);
+        return mesaRepository.save(mesa);
     }
 }
