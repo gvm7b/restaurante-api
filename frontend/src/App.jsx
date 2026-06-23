@@ -28,7 +28,15 @@ const resources = {
     idKey: "idCategoria",
     emptyForm: { nome: "" },
     columns: [{ key: "nome", label: "Nome" }],
-    fields: [{ name: "nome", label: "Nome da categoria", required: true }],
+    fields: [
+      {
+        name: "nome",
+        label: "Nome da categoria",
+        type: "select",
+        required: true,
+        options: ["Bebidas", "Pratos principais", "Sobremesas"],
+      },
+    ],
   },
   produtos: {
     label: "Produtos",
@@ -93,7 +101,13 @@ const resources = {
     ],
     fields: [
       { name: "nome", label: "Nome do funcionario", required: true },
-      { name: "cargo", label: "Cargo", required: true },
+      {
+        name: "cargo",
+        label: "Cargo",
+        type: "select",
+        required: true,
+        options: ["Atendente", "Garçom", "Responsável", "Funcionário responsável"],
+      },
       { name: "salario", label: "Salario", type: "number", step: "0.01", required: true },
     ],
     toPayload: (form) => ({
@@ -153,7 +167,13 @@ const resources = {
       { name: "formaPagamento", label: "Forma de pagamento", required: true },
       { name: "valorPago", label: "Valor pago", type: "number", step: "0.01", required: true },
       { name: "dataPagamento", label: "Data do pagamento", type: "datetime-local", required: true },
-      { name: "status", label: "Status", required: true },
+      {
+        name: "status",
+        label: "Status",
+        type: "select",
+        required: true,
+        options: ["Pendente", "Pago"],
+      },
     ],
     toForm: (item) => ({
       pedidoId: item.pedido?.idPedido ?? "",
@@ -312,6 +332,9 @@ function App() {
 
       resetForm();
       await refreshResource(activeResource);
+      if (activeResource === "pedidos") {
+        await refreshResource("mesas");
+      }
     } catch {
       setError(`Nao foi possivel salvar ${currentConfig.label.toLowerCase()}.`);
     } finally {
@@ -351,42 +374,35 @@ function App() {
         <header className="header">
           <div>
             <h1>Sistema de Restaurante</h1>
-            <p>Controle simples de cadastros e operacao</p>
           </div>
 
-          {activeResource !== "dashboard" && (
-            <button type="button" onClick={() => resetForm()}>
-              Novo cadastro
-            </button>
-          )}
         </header>
 
         {error && <p className="alert">{error}</p>}
 
-        <section className="cards">
-          {dashboardCards.map((card) => (
-            <div className="card" key={card.label}>
-              <span>{card.label}</span>
-              <strong>{card.value}</strong>
+        {activeResource === "dashboard" && (
+          <section className="dashboard-overview">
+            <div className="dashboard-heading">
+              <h2>Visao geral</h2>
+              <p>Quantidade de registros cadastrados no sistema.</p>
             </div>
-          ))}
-        </section>
 
-        {activeResource === "dashboard" ? (
-          <section className="panel">
-            <div className="panel-header">
-              <h2>Resumo</h2>
+            <div className="cards">
+              {dashboardCards.map((card) => (
+                <div className="card" key={card.label}>
+                  <span>{card.label}</span>
+                  <strong>{card.value}</strong>
+                </div>
+              ))}
             </div>
-            <p className="muted">Use o menu lateral para acessar os CRUDs do sistema.</p>
           </section>
-        ) : (
+        )}
+
+        {activeResource !== "dashboard" && (
           <>
             <section className="panel">
               <div className="panel-header">
                 <h2>{currentConfig.label}</h2>
-                <button type="button" onClick={() => resetForm()}>
-                  Cadastrar
-                </button>
               </div>
 
               <div className="table-wrapper">
@@ -475,6 +491,19 @@ function App() {
 
 function FormField({ field, value, data, onChange }) {
   if (field.type === "select") {
+    if (field.options) {
+      return (
+        <select value={value} onChange={(event) => onChange(event.target.value)} required={field.required}>
+          <option value="">{field.label}</option>
+          {field.options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      );
+    }
+
     const options = data[field.source] ?? [];
     const sourceConfig = resources[field.source];
 
@@ -534,7 +563,7 @@ function formatCell(item, column) {
 
 function getOptionLabel(item, resourceKey) {
   if (resourceKey === "mesas") {
-    return `Mesa ${item.numero}`;
+    return `Mesa ${item.numero} - ${item.status}`;
   }
 
   if (resourceKey === "pedidos") {
